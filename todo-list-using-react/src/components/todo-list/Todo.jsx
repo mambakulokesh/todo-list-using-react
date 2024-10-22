@@ -20,6 +20,7 @@ function Todo() {
       });
       setItems(updatedTasks);
       setEdit(null);
+      alert("Task Updated Successfully")
     } else {
       setItems([...items, todoList]);
     }
