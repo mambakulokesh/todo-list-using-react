@@ -6,16 +6,37 @@ function Todo() {
 
   const [items, setItems] = useState([]);
 
+  const [edit, setEdit] = useState(null);
+
   const addItem = () => {
-    if (todoList.trim() !== "") {
-      setItems([...items, todoList]);
-      setTodoList("");
+    if (todoList.trim() === "") {
+      alert("Enter Task");
+      return;
     }
+
+    if (edit !== null) {
+      const updatedTasks = items.map((item, index) => {
+        index === edit ? todoList : item;
+      });
+      setItems(updatedTasks);
+      setEdit(null);
+    } else {
+      setItems([...items, todoList]);
+    }
+
+    setTodoList("");
   };
 
   const RemoveItem = (index) => {
     const filteredItems = items.filter((_, i) => i !== index);
     setItems(filteredItems);
+    alert("Task is removed");
+  };
+
+  const editItem = (index) => {
+    const taskEdit = items[index];
+    setTodoList(taskEdit);
+    setEdit(index);
   };
 
   return (
@@ -33,24 +54,39 @@ function Todo() {
             }}
           />
           <button onClick={addItem} className="btn btn-info px-4">
-            Add
+            {edit !== null ? "Update" : "Add"}
           </button>
         </div>
 
         <ul className="list-group">
-          {
-          items.map((item, index) => {
+          {items.map((item, index) => {
             return (
-              <li key={index} className="list-group-item px-3 py-1" style={{fontSize : "19px"}}>
-                {item} 
-                <button className="btn btn-warning px-3 float-end">Edit</button>
-                <button onClick={()=>{
-                    RemoveItem(index)
-                }} className="btn btn-danger px-3 float-end me-3">Remove</button>
+              <li
+                key={index}
+                className="list-group-item px-3 py-1"
+                style={{ fontSize: "19px" }}
+              >
+                {item}
+                <button
+                  onClick={() => {
+                    editItem(index);
+                  }}
+                  className="btn btn-warning float-end"
+                >
+                  Edit
+                </button>
+
+                <button
+                  onClick={() => {
+                    RemoveItem(index);
+                  }}
+                  className="btn btn-danger float-end me-3"
+                >
+                  Remove
+                </button>
               </li>
             );
-          })
-          }
+          })}
         </ul>
       </div>
     </div>
