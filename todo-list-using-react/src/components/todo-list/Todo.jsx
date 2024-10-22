@@ -16,7 +16,7 @@ function Todo() {
 
     if (edit !== null) {
       const updatedTasks = items.map((item, index) => {
-        index === edit ? todoList : item;
+        return index === edit ? todoList : item;
       });
       setItems(updatedTasks);
       setEdit(null);
