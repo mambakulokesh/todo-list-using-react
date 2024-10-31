@@ -20,7 +20,7 @@ function Todo() {
       });
       setItems(updatedTasks);
       setEdit(null);
-      alert("Task Updated Successfully")
+      alert("Task Updated Successfully");
     } else {
       setItems([...items, todoList]);
     }
@@ -42,7 +42,11 @@ function Todo() {
 
   return (
     <div className="container mt-5 d-flex justify-content-center">
-      <div className="card shadow p-4" style={{ width: "35rem" }}>
+      <div
+        className="card shadow p-4"
+        id="todo-container"
+        style={{ width: "35rem" }}
+      >
         <div className="card-body text-center">
           <h5 className="card-title fs-3">Todo List</h5>
           <input
@@ -54,7 +58,7 @@ function Todo() {
               setTodoList(event.target.value);
             }}
           />
-          <button onClick={addItem} className="btn btn-info px-4">
+          <button onClick={addItem} className="btn btn-info px-4 text-white">
             {edit !== null ? "Update" : "Add"}
           </button>
         </div>
@@ -64,7 +68,7 @@ function Todo() {
             return (
               <li
                 key={index}
-                className="list-group-item px-3 py-1"
+                className="list-group-item fs-5 py-1 px-3 mx-3"
                 style={{ fontSize: "19px" }}
               >
                 {item}
